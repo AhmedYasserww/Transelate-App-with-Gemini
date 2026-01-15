@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-class LanguageDropdown extends StatefulWidget {
-  const LanguageDropdown({super.key, required this.onLanguageChanged});
+class LanguageDropdown extends StatelessWidget {
+  const LanguageDropdown({
+    super.key,
+    required this.value,
+    required this.onLanguageChanged,
+  });
+
+  final String? value;
   final ValueChanged<String?> onLanguageChanged;
 
-  @override
-  State<LanguageDropdown> createState() => _LanguageDropdownState();
-}
-
-class _LanguageDropdownState extends State<LanguageDropdown> {
-  final List<Map<String, String>> languageData = [
+  final List<Map<String, String>> languageData = const [
     {'countryLanguage': 'English - US', 'countryImage': 'assets/images/usa.png'},
     {'countryLanguage': 'English - UK', 'countryImage': 'assets/images/usa.png'},
     {'countryLanguage': 'Russian', 'countryImage': 'assets/images/russia.png'},
@@ -20,8 +21,6 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
     {'countryLanguage': 'Arabic', 'countryImage': 'assets/images/egypt.png'},
     {'countryLanguage': 'China', 'countryImage': 'assets/images/china.png'},
   ];
-
-  String? selectedCountry;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +41,7 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
       ),
       child: DropdownButton<String>(
         isExpanded: true,
-        value: selectedCountry,
+        value: value,
         hint: Text(
           "Select Language",
           style: TextStyle(
@@ -59,12 +58,11 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
         underline: Container(color: Colors.transparent),
         dropdownColor: isLight ? Colors.white : Colors.grey.shade900,
         items: languageData.map((country) {
-          final bool isSelected = selectedCountry == country['countryLanguage'];
+          final bool isSelected = value == country['countryLanguage'];
+
           return DropdownMenuItem<String>(
             value: country['countryLanguage'],
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
               children: [
                 ClipOval(
                   child: Image.asset(
@@ -74,9 +72,8 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                const SizedBox(width: 4),
-                Flexible(
-                  fit: FlexFit.loose,
+                const SizedBox(width: 6),
+                Expanded(
                   child: Text(
                     country['countryLanguage']!,
                     overflow: TextOverflow.ellipsis,
@@ -94,12 +91,7 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
             ),
           );
         }).toList(),
-        onChanged: (newValue) {
-          setState(() {
-            selectedCountry = newValue;
-          });
-          widget.onLanguageChanged(newValue);
-        },
+        onChanged: onLanguageChanged,
       ),
     );
   }

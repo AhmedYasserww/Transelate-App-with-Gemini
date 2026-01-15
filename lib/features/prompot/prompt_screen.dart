@@ -45,9 +45,13 @@ class _PromptScreenState extends State<PromptScreen> {
 
               LanguageBar(
                 isLight: isLight,
+                fromValue: selectCountryFrom,
+                toValue: selectCountryTo,
                 onFromChanged: (v) => setState(() => selectCountryFrom = v),
                 onToChanged: (v) => setState(() => selectCountryTo = v),
+                onSwap: _swapLanguages,
               ),
+
 
               const SizedBox(height: 16),
 
@@ -177,6 +181,14 @@ class _PromptScreenState extends State<PromptScreen> {
       },
     );
   }
+  void _swapLanguages() {
+    setState(() {
+      final temp = selectCountryFrom;
+      selectCountryFrom = selectCountryTo;
+      selectCountryTo = temp;
+    });
+  }
+
 
 
 }
