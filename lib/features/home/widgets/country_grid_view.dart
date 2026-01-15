@@ -23,7 +23,7 @@ class CountryGridView extends StatelessWidget {
     final isLight = theme.brightness == Brightness.light;
 
     int rowCount = (countryData.length / 2).ceil();
-    double gridHeight = rowCount * 70 + (rowCount - 1) * 12;
+    double gridHeight = rowCount * 73 + (rowCount - 1) * 12;
 
     return SizedBox(
       height: gridHeight,

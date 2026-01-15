@@ -53,8 +53,7 @@ class _HomeScreenState extends State<HomeScreen>
           IconButton(
             icon: Icon(isLight ? Icons.dark_mode : Icons.light_mode),
             onPressed: () {
-              TranslateApp.themeNotifier.value =
-              isLight ? ThemeMode.dark : ThemeMode.light;
+              TranslateApp.toggleTheme();
             },
           ),
         ],
