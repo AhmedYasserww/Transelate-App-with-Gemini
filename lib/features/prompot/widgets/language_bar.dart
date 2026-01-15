@@ -4,8 +4,8 @@ import 'language_dropdown.dart';
 class LanguageBar extends StatelessWidget {
   final bool isLight;
 
-  final String? fromValue;   // 👈 القيمة الحالية ل From
-  final String? toValue;     // 👈 القيمة الحالية ل To
+  final String? fromValue;
+  final String? toValue;
 
   final ValueChanged<String?> onFromChanged;
   final ValueChanged<String?> onToChanged;
